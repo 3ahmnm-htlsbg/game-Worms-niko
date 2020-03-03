@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class WormController : MonoBehaviour
 {
-    public int x;
-    public string text;
-    public float thrust = 1.0f;
-    public Rigidbody rb;
 
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody rbA;
+    private Rigidbody rbB;
+    public GameObject PlayerA;
+    public GameObject PlayerB;
+    public GameObject projectile;
+
+
+    public void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rbA = PlayerA.GetComponent<Rigidbody>();
+        rbB = PlayerB.GetComponent<Rigidbody>();
+        PlayerA = GameObject.FindGameObjectWithTag("PlayerA");
+        PlayerB = GameObject.FindGameObjectWithTag("PlayerB");
     }
+    [SerializeField] private GameObject spawnCubeA;
+    [SerializeField] private GameObject BazookaA;
+    [SerializeField] private GameObject spawnCubeB;
+    [SerializeField] private GameObject BazookaB;
 
-    void FixedUpdate()
+    public void Update()
     {
-        rb.AddForce(transform.forward * thrust);
-    }
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("a"))
+        if (PlayerA == true)
         {
-            print("a key was pressed");
-        }
-
-    }
-
-
-  
-}
+            if (Input.GetKey(KeyCode.A))
+            {
+                rbA.AddForce(-2.5f, 0f, 0f, ForceMode.Impulse);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                rbA.AddForce(2.5f, 0f, 0f, ForceMode.Impulse);
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                rbA.AddForce(0f, 2.5f, 0f, ForceMode.Impulse);
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameObject clone = Instantiate(projectile, spawnCubeA.transform.position, spawnCubeA.transform.rotation);
+                Rigidbody rbProjectile = clone.GetComponent<Rigidbody>();
+                rbProjectile.AddForce(BazookaA.transform.up * 400f);
+            }
