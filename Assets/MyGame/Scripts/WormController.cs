@@ -46,3 +46,6 @@ public class WormController : MonoBehaviour
                 Rigidbody rbProjectile = clone.GetComponent<Rigidbody>();
                 rbProjectile.AddForce(BazookaA.transform.up * 400f);
             }
+        }
+    }
+}
