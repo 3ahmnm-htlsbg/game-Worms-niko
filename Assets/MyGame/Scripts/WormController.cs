@@ -24,27 +24,49 @@ public class WormController : MonoBehaviour
     [SerializeField] private GameObject spawnCubeB;
     [SerializeField] private GameObject BazookaB;
 
+
     public void Update()
     {
         if (PlayerA == true)
         {
             if (Input.GetKey(KeyCode.A))
             {
-                rbA.AddForce(-2.5f, 0f, 0f, ForceMode.Impulse);
+                rbA.AddForce(-1.5f, 0f, 0f, ForceMode.Impulse);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                rbA.AddForce(2.5f, 0f, 0f, ForceMode.Impulse);
+                rbA.AddForce(1.5f, 0f, 0f, ForceMode.Impulse);
             }
             if (Input.GetKey(KeyCode.W))
             {
-                rbA.AddForce(0f, 2.5f, 0f, ForceMode.Impulse);
+                rbA.AddForce(0f, 1.5f, 0f, ForceMode.Impulse);
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                GameObject clone = Instantiate(projectile, spawnCubeA.transform.position, spawnCubeA.transform.rotation);
+                GameObject clone = Instantiate(projectile, spawnCubeA.transform.position, Quaternion.identity);
                 Rigidbody rbProjectile = clone.GetComponent<Rigidbody>();
-                rbProjectile.AddForce(BazookaA.transform.up * 400f);
+                rbProjectile.AddForce(BazookaA.transform.up * 200f);
+            }
+        }
+        if (PlayerB == true)
+        {
+            if (Input.GetKey(KeyCode.J))
+            {
+                rbB.AddForce(-1.5f, 0f, 0f, ForceMode.Impulse);
+            }
+            if (Input.GetKey(KeyCode.L))
+            {
+                rbB.AddForce(1.5f, 0f, 0f, ForceMode.Impulse);
+            }
+            if (Input.GetKey(KeyCode.I))
+            {
+                rbB.AddForce(0f, 1.5f, 0f, ForceMode.Impulse);
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                GameObject clone = Instantiate(projectile, spawnCubeB.transform.position, Quaternion.identity);
+                Rigidbody rbProjectile = clone.GetComponent<Rigidbody>();
+                rbProjectile.AddForce(BazookaB.transform.up * 200f);
             }
         }
     }
